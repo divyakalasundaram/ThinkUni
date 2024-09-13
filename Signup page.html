@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up Form with Animations</title>
+    <style>
+        /* Apply Netflix-like dark theme */
+        body {
+            background: #141414;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: #e5e5e5;
+        }
+
+        .form-container {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+            animation: fadeIn 1s ease-out;
+            width: 320px;
+        }
+
+        /* Animation for form fade-in */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            color: #e5e5e5;
+            font-weight: bold;
+        }
+
+        .input-container {
+            position: relative;
+        }
+
+        input[type="text"], input[type="password"], input[type="date"] {
+            display: block;
+            margin: 10px auto;
+            padding: 12px;
+            width: calc(100% - 24px);
+            border: 1px solid #333;
+            border-radius: 5px;
+            background-color: #333;
+            color: #e5e5e5;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* Add eye icon next to password input */
+        .toggle-password {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            font-size: 18px;
+            color: #e5e5e5;
+        }
+
+        /* Animate input fields on focus */
+        input[type="text"]:focus, input[type="password"]:focus, input[type="date"]:focus {
+            border-color: #e50914;
+            outline: none;
+            box-shadow: 0 0 10px rgba(229, 9, 20, 0.5);
+        }
+
+        button {
+            margin: 10px 0;
+            padding: 12px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            background-color: #e50914;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        /* Animate button on hover */
+        button:hover {
+            background-color: #f40612;
+            transform: translateY(-3px);
+        }
+
+        .success-message {
+            display: none;
+            color: #00e676;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 20px;
+            animation: fadeInSuccess 1s ease-out;
+        }
+
+        /* Success message animation */
+        @keyframes fadeInSuccess {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .help-link {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            color: #e50914;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .help-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <form id="signupForm">
+            <div>
+                <label for="username">Username</label>
+                <input type="text" name="username" id="username" placeholder="Enter a Username or E-mail" size="20" maxlength="10" required>
+            </div>
+            <div>
+                <label for="mobile-number">Mobile number</label>
+                <input type="text" name="mobile_number" id="mobile-number" size="20" required>
+            </div>
+            <div>
+                <label for="dob">D.O.B</label>
+                <input type="date" name="dob" id="dob" required>
+            </div>
+            <div class="input-container">
+                <label for="password">Password</label>
+                <input type="password" name="Password" id="password" placeholder="Password" size="20" maxlength="8" required>
+                <span class="toggle-password" onclick="togglePasswordVisibility('password')">👁</span>
+            </div>
+            <div class="input-container">
+                <label for="confirm-password">Confirm Password</label>
+                <input type="password" name="Confirm password" id="confirm-password" placeholder="Confirm Password" size="20" maxlength="8" required>
+                <span class="toggle-password" onclick="togglePasswordVisibility('confirm-password')">👁</span>
+            </div>
+            <button type="submit">Sign Up</button>
+            <button type="reset">Reset</button>
+            <div class="success-message" id="successMessage">Form submitted successfully!</div>
+            <div>
+                  ALREADY HAVE AN ACCOUNT? <a href="bye.html">sigh-in</a>
+            </div> </form>
+    <script>
+        // Function to toggle password visibility
+        function togglePasswordVisibility(id) {
+            var passwordField = document.getElementById(id);
+            var passwordType = passwordField.getAttribute("type");
+            if (passwordType === "password") {
+                passwordField.setAttribute("type", "text");
+            } else {
+                passwordField.setAttribute("type", "password");
+            }
+        }
+
+        document.getElementById('signupForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission
+            document.getElementById('successMessage').style.display = 'block'; // Show success message
+            setTimeout(function() {
+                document.getElementById('successMessage').style.display = 'none'; // Hide success message after 3 seconds
+            }, 3000);
+        });
+    </script>
+</body>
+</html>
